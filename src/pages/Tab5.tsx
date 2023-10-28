@@ -1,29 +1,78 @@
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonLabel, IonPage, IonTitle, IonToolbar} from '@ionic/react';
+import React, {useEffect, useState } from 'react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab5.css';
-import { useHistory } from 'react-router';
+import axios from 'axios';
+import { User } from '../interfaces/user';
 import { useAuth } from '../components/AuthContext';
+import { useHistory } from 'react-router';
 
 const Tab5: React.FC = () => {
+  const [user, setUser] = useState<User | undefined>();
 
-  const history = useHistory();
-  const { logout  } = useAuth();
+  const { userId, logout } = useAuth();
+
+  const getUser = async (user: number) => {
+    try {
+      setUser((await axios.get<User>(`https://erms.stefhol.eu/api/v1/user/${userId}`, {  })).data);
+    } catch (error) {
+      console.error("Login failed", error);
+    }
+  };
+
+  function calculateAge(birthdate: Date | undefined): number | undefined {
+    if (!birthdate) {
+      return undefined;
+    }
+  
+    const currentDate = new Date();
+    const birthYear = birthdate.getFullYear();
+    const birthMonth = birthdate.getMonth();
+    const birthDay = birthdate.getDate();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const currentDay = currentDate.getDate();
+
+    const history = useHistory();
+  
+    let age = currentYear - birthYear;
+  
+    // Check if the birthday for this year has already occurred
+    if (currentMonth < birthMonth || (currentMonth === birthMonth && currentDay < birthDay)) {
+      age--;
+    }
+  
+    return age;
+  }
+  useEffect(() => {
+    getUser(1);
+    console.log(user?.email);
+    }, []);
 
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Tab 5</IonTitle>
+        <IonToolbar color="primary">
+          <IonTitle style={{ textAlign: 'center' }}>ShareWheels</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 5</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 5 page" />
-        <IonButton expand="full" onClick={logout}>Logout</IonButton>
+        <IonCard>
+          <img alt="Silhouette of mountains" src="https://plus.unsplash.com/premium_photo-1681822817140-bce6c12809fb?auto=format&fit=crop&q=80&w=2672&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+          <IonCardHeader>
+            <IonCardTitle>{user?.name}</IonCardTitle>
+            <IonCardSubtitle>{calculateAge(new Date(user?.birthday!))}Jahre</IonCardSubtitle>
+          </IonCardHeader>
+          <IonCardContent>{user?.description}</IonCardContent>
+        </IonCard>
+        <div style={{ padding: '20px' }}>
+          <IonButton expand="full" color="primary">Deine Autos</IonButton>
+          <IonButton expand="full" color="primary">Bisherige Buchungen</IonButton>
+          <IonButton expand="full" color="primary">Einstellungen</IonButton>
+          <IonButton expand="full" color="primary">Hilfe</IonButton>
+          <IonButton expand="full" color="primary">Einstellungen</IonButton>
+          <IonButton expand="full" onClick={logout}>Logout</IonButton>
+        </div>
       </IonContent>
     </IonPage>
   );
