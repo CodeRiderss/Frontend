@@ -1,8 +1,14 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab5.css';
+import { useHistory } from 'react-router';
+import { useAuth } from '../components/AuthContext';
 
 const Tab5: React.FC = () => {
+
+  const history = useHistory();
+  const { logout  } = useAuth();
+
   return (
     <IonPage>
       <IonHeader>
@@ -17,6 +23,7 @@ const Tab5: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <ExploreContainer name="Tab 5 page" />
+        <IonButton expand="full" onClick={logout}>Logout</IonButton>
       </IonContent>
     </IonPage>
   );
