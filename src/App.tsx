@@ -35,56 +35,22 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { AuthProvider } from './components/AuthContext';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import MainTabs from './pages/MainTabs';
+import PrivateRoute from './components/PrivateRoute';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
-          <Route path="/tab4">
-            <Tab4 />
-          </Route>
-          <Route path="/tab5">
-            <Tab5 />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/tab1" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon aria-hidden="true" icon={searchOutline} />
-            <IonLabel>Suche</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon aria-hidden="true" icon={pricetagsOutline} />
-            <IonLabel>Anbieten </IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon aria-hidden="true" icon={bookOutline} />
-            <IonLabel>Buchungen</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab4" href="/tab4">
-            <IonIcon aria-hidden="true" icon={chatboxEllipsesOutline} />
-            <IonLabel>Posteingang</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab5" href="/tab5">
-            <IonIcon aria-hidden="true" icon={personOutline} />
-            <IonLabel>Profil</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+      <AuthProvider>
+        <Route path="/login" component={Login} exact />
+        <Route path="/register" component={Register} exact />
+        <PrivateRoute path="/tabs" component={MainTabs} />
+      </AuthProvider>
     </IonReactRouter>
   </IonApp>
 );
