@@ -1,0 +1,7 @@
+{
+  "name": "nfcTest",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
