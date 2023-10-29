@@ -10,30 +10,30 @@ import { useAuth } from '../components/AuthContext';
     const { userId  } = useAuth();
 
     const [messages, setMessages] = useState<Message[] | undefined>();
-    const [toUserId, setToUserId] = useState<number>();
+    const toUserId= useRef<number>();
 
-    const [message, setMessage] = useState<string>("");
+    const [message, setMessage] = useState<string>();
 
-    const getMessages = useCallback(async () => {
-        if (toUserId === null) return;
+      const getMessages = async () => {
+        if (toUserId.current === null) return;
     
-
+        console.log(toUserId.current);
         console.log("Get messages");
         try {
-          const response = await axios.post<Message[]>(`https://erms.stefhol.eu/api/v1/message`, { from : userId, to : toUserId });
+          const response = await axios.post<Message[]>(`https://erms.stefhol.eu/api/v1/message`, { from : userId, to : toUserId.current });
           setMessages(response.data);
         } catch (error) {
           console.error("Failed to get messages", error);
         }
-      }, [toUserId, userId]);
-
-
+      };
 
       const sendMessage = async () => {
-        if (toUserId === null) return;
+        if (toUserId.current === null) return;
     
         try {
-          await axios.post(`https://erms.stefhol.eu/api/v1/user/${userId}/message`, { text: message, to: toUserId });
+            console.log(message);
+            
+          await axios.post(`https://erms.stefhol.eu/api/v1/user/${userId}/message`, { text: message, to: toUserId.current });
           setMessage(""); // Clear the current message
           getMessages();   // Optionally, refresh messages after sending
         } catch (error) {
@@ -42,21 +42,20 @@ import { useAuth } from '../components/AuthContext';
       };
 
       useEffect(() => {
+
         const params = new URLSearchParams(location.search);
         const toUser = params.get('to');
         if (toUser) {
-          const toUserIdNumber = parseInt(toUser, 10);
+          const toUserIdNumber = parseInt(toUser);
           if (!isNaN(toUserIdNumber)) {
             console.log('Setting toUserId from URL:', toUserIdNumber);
-            setToUserId(toUserIdNumber);
+            toUserId.current = toUserIdNumber;
           }
         }
-      }, [location.search]);
-    
-      useEffect(() => {
+
         console.log('Fetching messages...');
         getMessages();
-      }, [getMessages]);
+      }, []);
 
   
 
@@ -73,7 +72,7 @@ import { useAuth } from '../components/AuthContext';
       <IonContent>
         <div className="chat-container">
           {messages?.map((message) => (
-            <IonChip key={message.id} className={message.from.id == userId ? "sent" : "received"}>
+            <IonChip key={message.id} className={message.fromUserId == userId ? "sent" : "received"}>
               <IonLabel>{message.text}</IonLabel>
             </IonChip>
           ))}
@@ -81,7 +80,7 @@ import { useAuth } from '../components/AuthContext';
       </IonContent>
       <IonFooter>
         <IonItem lines="none" className="chat-input-item">
-            <IonInput value={message} onIonChange={(e) => setMessage(e.detail.value!)} />
+          <IonInput value={message} onIonChange={(e) => setMessage(e.detail.value!)} />
           <IonButton onClick={sendMessage} className="chat-send-button">Send</IonButton>
         </IonItem>
       </IonFooter>
