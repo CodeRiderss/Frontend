@@ -13,7 +13,7 @@ const Tab5: React.FC = () => {
 
   const { userId, logout } = useAuth();
 
-  const getUser = async (user: string) => {
+  const getUser = async (user: number) => {
     try {
       setUser((await axios.get<User>(`https://erms.stefhol.eu/api/v1/user/${user}`, {})).data);
     } catch (error) {

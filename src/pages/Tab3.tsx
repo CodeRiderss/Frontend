@@ -12,7 +12,7 @@ const Tab3: React.FC = () => {
 
   const { userId, } = useAuth();
 
-  const getOrders = async (user: string) => {
+  const getOrders = async (user: number) => {
     try {
       setOrders((await axios.get<Order[]>(`https://erms.stefhol.eu/api/v1/user/${user}/order`, {})).data);
     } catch (error) {
@@ -21,7 +21,6 @@ const Tab3: React.FC = () => {
   };
   useEffect(() => {
     getOrders(userId!);
-    console.table(orders)
   }, []);
 
   return (
@@ -39,7 +38,7 @@ const Tab3: React.FC = () => {
         </IonHeader>
 
         {orders?.map((order) => (
-          <IonCard>
+          <IonCard key={order.id}>
             <IonCardHeader>
               <IonCardTitle>{order.offer.car.model}</IonCardTitle>
               <IonCardSubtitle>
