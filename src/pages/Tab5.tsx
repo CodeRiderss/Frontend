@@ -59,7 +59,7 @@ const Tab5: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonCard>
-          <img alt="Silhouette of mountains" src="https://plus.unsplash.com/premium_photo-1681822817140-bce6c12809fb?auto=format&fit=crop&q=80&w=2672&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+          <img alt="Silhouette of mountains" src={user?.profileUrl ?? "https://plus.unsplash.com/premium_photo-1681822817140-bce6c12809fb?auto=format&fit=crop&q=80&w=2672&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} />
           <IonCardHeader>
             <IonCardTitle>{user?.name}</IonCardTitle>
             <IonCardSubtitle>{calculateAge(new Date(user?.birthday!))} Jahre</IonCardSubtitle>

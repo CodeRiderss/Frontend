@@ -10,6 +10,7 @@ import Tab3 from './Tab3';
 import Tab4 from './Posteingang';
 import Tab5 from './Tab5';
 import Chat from './Chat';
+import DigitalKey from './DigitalKey';
 
 const MainTabs: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const MainTabs: React.FC = () => {
         <Route exact path="/tabs/tab4" component={Tab4} />
         <Route path="/tabs/chat" component={Chat} />
         <Route path="/tabs/tab5" component={Tab5} />
+        <Route path="/tabs/digitalkey" component={DigitalKey}/>
         <Redirect exact from="/tabs" to="/tabs/tab1" />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">

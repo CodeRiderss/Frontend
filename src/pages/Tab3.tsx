@@ -1,4 +1,4 @@
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
 import { Order } from '../interfaces/order';
@@ -6,8 +6,10 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../components/AuthContext';
 import axios from 'axios';
 import { star } from 'ionicons/icons';
+import { useHistory } from 'react-router';
 
 const Tab3: React.FC = () => {
+  const history = useHistory();
   const [orders, setOrders] = useState<Order[] | undefined>();
 
   const { userId, } = useAuth();
@@ -38,18 +40,20 @@ const Tab3: React.FC = () => {
         </IonHeader>
 
         {orders?.map((order) => (
-          <IonCard key={order.id}>
-            <IonCardHeader>
-              <IonCardTitle>{order.offer.car.model}</IonCardTitle>
-              <IonCardSubtitle>
-                von {order.offer.user.name} {!isNaN(order.offer.user.averageRating) ? order.offer.user.averageRating : "-"}/5.0
-                <IonIcon icon={star} style={{ paddingLeft:"0.3rem", color: "orange" }}></IonIcon>
-              </IonCardSubtitle>
-              <IonCardSubtitle>von {new Date(order.startDate).toDateString()} bis {new Date(order.endDate).toDateString()}</IonCardSubtitle>
-              <IonCardSubtitle>{order.priceInEuro}€ Mietkosten</IonCardSubtitle>
-            </IonCardHeader>
-            <img alt="image link" src={order.offer.car.imageUrl} />
-          </IonCard>
+          <IonButton onClick={() => history.push(`/tabs/digitalkey?orderId=${order.id}`)} key={order.id}>
+            <IonCard >
+              <IonCardHeader>
+                <IonCardTitle>{order.offer.car.model}</IonCardTitle>
+                <IonCardSubtitle>
+                  von {order.offer.user.name} {!isNaN(order.offer.user.averageRating) ? order.offer.user.averageRating : "-"}/5.0
+                  <IonIcon icon={star} style={{ paddingLeft:"0.3rem", color: "orange" }}></IonIcon>
+                </IonCardSubtitle>
+                <IonCardSubtitle>von {new Date(order.startDate).toDateString()} bis {new Date(order.endDate).toDateString()}</IonCardSubtitle>
+                <IonCardSubtitle>{order.priceInEuro}€ Mietkosten</IonCardSubtitle>
+              </IonCardHeader>
+              <img alt="image link" src={order.offer.car.imageUrl} />
+            </IonCard>
+          </IonButton>
         ))}
 
       </IonContent>
