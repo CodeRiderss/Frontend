@@ -70,7 +70,7 @@ const Tab5: React.FC = () => {
           </IonCardHeader>
           <IonCardContent>{user?.description}</IonCardContent>
         </IonCard>
-        <div style={{ padding: '20px', textAlign: 'left' }}>
+        <div style={{ padding: '10px', textAlign: 'left' }}>
           <IonButton expand="full" color="primary">Deine Autos</IonButton>
           <IonButton expand="full" color="primary">Bisherige Buchungen</IonButton>
           <IonButton expand="full" color="primary">Meine Bewertungen</IonButton>

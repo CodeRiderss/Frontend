@@ -35,13 +35,13 @@ const Tab3: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader style={{ padding: 10 }}>
           <IonToolbar >
-            <IonTitle style={{ padding: 10, fontSize: 24 }} color="primary" class="ion-text-primary">Deine Buchungen</IonTitle>
+            <IonTitle style={{ padding: 10, fontSize: 24 }} class="ion-text-primary">Deine Buchungen</IonTitle>
           </IonToolbar>
         </IonHeader>
 
         {orders?.map((order) => (
-          <IonButton onClick={() => history.push(`/tabs/digitalkey?orderId=${order.id}`)} key={order.id}>
-            <IonCard >
+          <IonButton color="white" onClick={() => history.push(`/tabs/digitalkey?orderId=${order.id}`)} key={order.id}>
+            <IonCard>
               <IonCardHeader>
                 <IonCardTitle>{order.offer.car.model}</IonCardTitle>
                 <IonCardSubtitle>

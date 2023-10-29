@@ -23,7 +23,7 @@ const Register: React.FC = () => {
     
     try {
       const response = await axios.post('https://erms.stefhol.eu/api/v1/register', { name, password, description, birthday, experience, telephone, email, profileUrl : "" });
-      history.push('/login');
+      history.push('/');
     } catch (error) {
       console.error("registration failed", error);
     }
