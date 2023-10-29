@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   IonPage,
   IonHeader,
@@ -10,33 +10,55 @@ import {
   IonLabel,
   IonButton,
 } from '@ionic/react';
-import Map from './Map';
+import { Geolocation } from '@capacitor/geolocation';
+import { useHistory } from 'react-router';
 
 const Tab1: React.FC = () => {
+  const history = useHistory();
   const [postcode, setPostcode] = useState<string>('');
+  const [street, setStreet] = useState<string>('');
+  const [streetNumber, setStreetNumber] = useState<string>('');
+  const [city, setCity] = useState<string>('');
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
   const [seats, setSeats] = useState<string>('');
-  const [showMap, setShowMap] = useState(false);
+  const [longitude, setLongitude] = useState<number>(0);
+  const [latitude, setLatitude] = useState<number>(0);
 
-  const openMap = () => {
-    if (showMap) {
-      setShowMap(false);
-    }else {
 
-    setShowMap(true);
-    }
-  };
-
+  async function getCurrentPosition() {
+    const coordinates = await Geolocation.getCurrentPosition();
+    setLongitude(coordinates.coords.longitude);
+    setLatitude(coordinates.coords.latitude);
+    console.log("Longitude: " + longitude);
+    console.log("Latitude: " + latitude);
+  }
 
   const handleSubmit = () => {
     // Do something with the selected values, e.g., send them to an API
-    console.log("Hi")
+    console.log('Street:', street);
+    console.log('Street Number:', streetNumber);
+    console.log('City:', city);
     console.log('Postcode:', postcode);
     console.log('Start Date:', startDate);
     console.log('End Date:', endDate);
     console.log('Seats:', seats);
+
+    console.log('Longitude:', longitude);
+    console.log('Latitude:', latitude);
+    history.push(`/search?long=${longitude}&lat=${latitude}`);
+
+
   };
+  useEffect(() => {
+
+  
+
+    try {getCurrentPosition();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   return (
     <IonPage>
@@ -49,19 +71,40 @@ const Tab1: React.FC = () => {
         
         <div style={{ textAlign: 'center' }}>
           <IonItem style={{ padding: '20px' }}>
-            <IonLabel color="primary" position="floating" style={{fontWeight:'bold' }}>Miete ein Auto</IonLabel>
+            <IonLabel color="primary" style={{fontWeight:'bold' }}>Miete ein Auto</IonLabel>
             
+          </IonItem>
+          <IonItem style={{ padding: '20px' }}>
+            <IonLabel position="floating">Enter street name</IonLabel>
+            <IonInput
+              type="text"
+              value={street}
+              onIonChange={(e) => setStreet(e.detail.value!)}
+            />
+          </IonItem>
+          <IonItem style={{ padding: '20px' }}>
+            <IonLabel position="floating">Enter street number</IonLabel>
+            <IonInput
+              type="number"
+              value={streetNumber}
+              onIonChange={(e) => setStreetNumber(e.detail.value!)}
+            />
+          </IonItem>
+          <IonItem style={{ padding: '20px' }}>
+            <IonLabel position="floating">Enter city name</IonLabel>
+            <IonInput
+              type="text"
+              value={city}
+              onIonChange={(e) => setCity(e.detail.value!)}
+            />
           </IonItem>
           <IonItem style={{ padding: '20px' }}>
             <IonLabel position="floating">Enter Postal Code</IonLabel>
             <IonInput
-              type="text"
+              type="number"
               value={postcode}
               onIonChange={(e) => setPostcode(e.detail.value!)}
             />
-            <IonButton onClick={openMap}>Open Map for Location Selection</IonButton>
-
-            {showMap && <Map />}
           </IonItem>
           
           <IonItem style={{ padding: '20px' }}>

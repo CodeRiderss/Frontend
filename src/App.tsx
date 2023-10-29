@@ -38,8 +38,11 @@ import './theme/variables.css';
 import { AuthProvider } from './components/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Search from './pages/Search';
 import MainTabs from './pages/MainTabs';
 import PrivateRoute from './components/PrivateRoute';
+import Insure from './pages/Insure';
+import Finish from './pages/Finish';
 
 setupIonicReact();
 
@@ -50,6 +53,9 @@ const App: React.FC = () => (
         <Route path="/login" component={Login} exact />
         <Route path="/register" component={Register} exact />
         <PrivateRoute path="/tabs" component={MainTabs} />
+        <Route path="/search" component={Search} exact />
+        <Route path="/insure" component={Insure} exact />
+        <Route path="/finish" component={Finish} exact />
       </AuthProvider>
     </IonReactRouter>
   </IonApp>
