@@ -1,4 +1,4 @@
-import { IonChip, IonContent, IonHeader, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonAvatar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Posteingang.css';
 import { useHistory } from 'react-router';
@@ -34,8 +34,8 @@ const Tab4: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Posteingang</IonTitle>
+        <IonToolbar color="primary">
+          <IonTitle style={{ textAlign: 'center' }}>ShareWheels</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -46,11 +46,19 @@ const Tab4: React.FC = () => {
         </IonHeader>
         <IonContent>
           <IonList>
-            {chats?.map((chat) => (
-              <IonItem key={chat.id} button onClick={() => openChat(userId, chat.id)}>
-                <IonLabel>{chat.name}</IonLabel>
-              </IonItem>
-            ))}
+
+          {chats?.map((chat) => (
+            <IonCard key={chat.id} button onClick={() => openChat(userId, chat.id)}>
+              <IonCardHeader>
+                <IonItem lines="none">
+                <IonAvatar slot="start" className="large-avatar">
+                  <img alt="Profile" src={chat.profileUrl ?? "https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133351928-stock-illustration-default-placeholder-man-and-woman.jpg"} />
+                </IonAvatar>
+                  <IonCardTitle>{chat.name}</IonCardTitle>
+                </IonItem>
+              </IonCardHeader>
+            </IonCard>
+          ))}
           </IonList>
         </IonContent>
       </IonContent>
