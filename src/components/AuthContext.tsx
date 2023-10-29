@@ -4,7 +4,7 @@ import axios from 'axios';
 
 interface AuthContextProps {
   isAuthenticated: boolean;
-  userId: string | null;
+  userId: number | null;
   login: (email: string, password: string) => Promise<boolean>; // Updated the return type to Promise<boolean>
   logout: () => void;
 }
@@ -17,7 +17,7 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [userId, setUserId] = useState<string | null>(null);
+  const [userId, setUserId] = useState<number | null>(null);
 
   const login = async (email: string, password: string) => {
     try {

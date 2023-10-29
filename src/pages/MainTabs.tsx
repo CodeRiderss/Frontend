@@ -7,8 +7,9 @@ import { searchOutline, pricetagsOutline, personOutline } from 'ionicons/icons';
 import Tab1 from './Tab1'; // Assuming you have these components created
 import Tab2 from './Tab2';
 import Tab3 from './Tab3';
-import Tab4 from './Tab4';
+import Tab4 from './Posteingang';
 import Tab5 from './Tab5';
+import Chat from './Chat';
 
 const MainTabs: React.FC = () => {
   return (
@@ -17,7 +18,8 @@ const MainTabs: React.FC = () => {
         <Route exact path="/tabs/tab1" component={Tab1} />
         <Route exact path="/tabs/tab2" component={Tab2} />
         <Route path="/tabs/tab3" component={Tab3} />
-        <Route path="/tabs/tab4" component={Tab4} />
+        <Route exact path="/tabs/tab4" component={Tab4} />
+        <Route path="/tabs/chat" component={Chat} />
         <Route path="/tabs/tab5" component={Tab5} />
         <Redirect exact from="/tabs" to="/tabs/tab1" />
       </IonRouterOutlet>

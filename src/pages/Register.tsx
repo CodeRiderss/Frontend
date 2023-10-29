@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { IonPage, IonContent, IonInput, IonButton, IonLabel, IonDatetimeButton, IonModal, IonDatetime } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { User } from '../interfaces/user';
 
 const Register: React.FC = () => {
   const history = useHistory();
@@ -21,7 +22,7 @@ const Register: React.FC = () => {
     // If registration is successful
     
     try {
-      const response = await axios.post('https://erms.stefhol.eu/api/v1/register', { name, password, description, birthday, experience, telephone, email });
+      const response = await axios.post('https://erms.stefhol.eu/api/v1/register', { name, password, description, birthday, experience, telephone, email, profileUrl : "" });
       history.push('/login');
     } catch (error) {
       console.error("registration failed", error);

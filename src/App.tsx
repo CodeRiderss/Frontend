@@ -14,7 +14,7 @@ import { searchOutline, personOutline, pricetagsOutline, chatboxEllipsesOutline,
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
-import Tab4 from './pages/Tab4';
+import Tab4 from './pages/Posteingang';
 import Tab5 from './pages/Tab5';
 
 /* Core CSS required for Ionic components to work properly */
@@ -40,6 +40,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import MainTabs from './pages/MainTabs';
 import PrivateRoute from './components/PrivateRoute';
+import Chat from './pages/Chat';
 
 setupIonicReact();
 
