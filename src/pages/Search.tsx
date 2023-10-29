@@ -3,6 +3,7 @@ import axios from 'axios';
 import { IonPage, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent,IonIcon, IonCardSubtitle, IonButton, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
 import { Link } from 'react-router-dom';
 import { star } from 'ionicons/icons';
+import { useAuth } from '../components/AuthContext';
 
 
 const Search: React.FC = () => {
@@ -13,6 +14,7 @@ const Search: React.FC = () => {
   let von = params.get('von');
   let bis = params.get('bis');
   const [data, setData] = useState([]);
+    const { userId } = useAuth();
 
   // Function to calculate distance using Haversine formula
   function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -70,7 +72,7 @@ const Search: React.FC = () => {
             </IonCardHeader>
             <img alt="image link" src={item.car.imageUrl} />
             <IonCardContent>
-              <Link to={`/tabs/insure?prize=${item.priceInEuro}&von=${von}&bis=${bis}&user=${item.user.id}&offer=${item.id}`}> 
+              <Link to={`/tabs/insure?prize=${item.priceInEuro}&von=${von}&bis=${bis}&user=${userId}&offer=${item.id}`}> 
                 <IonButton color="primary" style={{ paddingLeft:"0.3rem", justifyContent: 'center' }}>
                   Buchen
                 </IonButton>
