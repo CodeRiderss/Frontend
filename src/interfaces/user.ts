@@ -9,6 +9,7 @@ export interface User {
     ratings:     Rating[];
     id:          number;
     profileUrl?:  string;
+    averageRating: number;
 }
 
 export interface Rating {

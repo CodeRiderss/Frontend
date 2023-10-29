@@ -13,6 +13,7 @@ import Chat from './Chat';
 import Search from './Search';
 import Insure from './Insure';
 import Finish from './Finish';
+import DigitalKey from './DigitalKey';
 
 const MainTabs: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ const MainTabs: React.FC = () => {
         <Route path="/tabs/search" component={Search} exact />
         <Route path="/tabs/insure" component={Insure} exact />
         <Route path="/tabs/finish" component={Finish} exact />
+        <Route path="/tabs/digitalkey" component={DigitalKey}/>
         <Redirect exact from="/tabs" to="/tabs/tab1" />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
