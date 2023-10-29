@@ -1,20 +1,19 @@
-import { useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import axios from 'axios';
-import { IonPage, IonContent, IonIcon, IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonItem, IonLabel, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
-import { Link } from 'react-router-dom';
+import { IonPage, IonContent, IonIcon, IonText, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
 import { checkmarkCircle } from 'ionicons/icons';
 
 const Finish: React.FC = () => {
-
-    
+  
         const containerStyle = {
           display: 'flex',
-          
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          height: '100vh',
+          height: '-webkit-fill-available;',
+          padding: '3rem',
           backgroundColor: '#f0f0f0', // Background color
-        };
+        } as CSSProperties;
       
         const successIconStyle = {
           fontSize: '5rem',
@@ -37,8 +36,8 @@ const Finish: React.FC = () => {
         const user = params.get('user');
 
         axios.post('https://erms.stefhol.eu/api/v1/user/'+user+'/order', {
-            startDate: new Date(params.get('von')).toISOString(),
-            endDate: new Date(params.get('bis')).toISOString(),
+            startDate: new Date(params.get('von')!).toISOString(),
+            endDate: new Date(params.get('bis')!).toISOString(),
             offerId: params.get('offer'),
 
         }).then((response) => {
@@ -50,7 +49,12 @@ const Finish: React.FC = () => {
         );
 
     }, []);
-
+function calc(){
+    const params = new URLSearchParams(location.search);
+    const startDate = new Date(params.get('von')!)
+            const endDate = new Date(params.get('bis')!)
+    return  (endDate.valueOf() - startDate.valueOf() ) / (1000 * 60 * 60 * 24) * 3.5
+}
   // Function to calculate distance using Haversine formula
  
  
@@ -63,10 +67,16 @@ const Finish: React.FC = () => {
       </IonHeader>
       <IonContent>
         <div style={containerStyle}>
+          <span style={{    display: 'flex',
+    alignItems: 'center'}}>
           <IonIcon icon={checkmarkCircle} style={successIconStyle} />
           <IonText style={successMessageStyle}>Order Successful!</IonText>
-          
+          </span>
+          <IonText> Im Vergleich zu einem eigenen Auto hast du heute durch das nutzen eines bereits bestehenden Autos {calc().toFixed(2)}kg Co2 gesparrt</IonText>
         </div>
+        
+            
+        
       </IonContent>
     </IonPage>
   );

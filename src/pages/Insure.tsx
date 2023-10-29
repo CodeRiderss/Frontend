@@ -7,7 +7,7 @@ const Insure: React.FC = () => {
  
     let insure = window.location.search;
     let params = new URLSearchParams(insure);
-    let prize = parseFloat(params.get('prize'));
+    let prize = parseFloat(params.get('prize')!);
     let von = params.get('von');
     let bis = params.get('bis');
     let user = params.get('user');

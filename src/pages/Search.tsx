@@ -9,8 +9,8 @@ import { useAuth } from '../components/AuthContext';
 const Search: React.FC = () => {
   let search = window.location.search;
   let params = new URLSearchParams(search);
-  let longitude = parseFloat(params.get('long'));
-  let latitude = parseFloat(params.get('lat'));
+  let longitude = parseFloat(params.get('long')!);
+  let latitude = parseFloat(params.get('lat')!);
   let von = params.get('von');
   let bis = params.get('bis');
   const [data, setData] = useState([]);
