@@ -11,7 +11,7 @@ const Finish: React.FC = () => {
           alignItems: 'center',
           justifyContent: 'center',
           height: '-webkit-fill-available;',
-          padding: '3rem',
+          padding: '1.5rem',
           backgroundColor: '#f0f0f0', // Background color
         } as CSSProperties;
       
@@ -72,7 +72,7 @@ function calc(){
           <IonIcon icon={checkmarkCircle} style={successIconStyle} />
           <IonText style={successMessageStyle}>Order Successful!</IonText>
           </span>
-          <IonText> Im Vergleich zu einem eigenen Auto hast du heute durch das nutzen eines bereits bestehenden Autos {calc().toFixed(2)}kg Co2 gesparrt</IonText>
+          <IonText> Du hast heute <b> {calc().toFixed(2)}kg Co2</b> gespart.</IonText>
         </div>
         
             
