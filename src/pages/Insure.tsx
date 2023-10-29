@@ -24,7 +24,11 @@ const Insure: React.FC = () => {
           <IonTitle style={{ textAlign: 'center' }}>ShareWheels</IonTitle>
         </IonToolbar>
       </IonHeader>
+      
       <IonContent>
+      <IonItem style={{ padding: '20px' }}>
+            <IonLabel color="primary" style={{fontWeight:'bold' }}>Wähle eine Versicherung</IonLabel>
+          </IonItem>
         
           <IonCard >
           <IonItem style={{ padding: '20px' }}>
