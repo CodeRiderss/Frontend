@@ -1,12 +1,55 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { IonPage, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonItem, IonLabel, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
+import { IonPage, IonContent, IonIcon, IonText, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonItem, IonLabel, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
 import { Link } from 'react-router-dom';
+import { checkmarkCircle } from 'ionicons/icons';
 
 const Finish: React.FC = () => {
+
+    
+        const containerStyle = {
+          display: 'flex',
+          
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100vh',
+          backgroundColor: '#f0f0f0', // Background color
+        };
+      
+        const successIconStyle = {
+          fontSize: '5rem',
+          color: 'green', // Icon color
+        };
+      
+        const successMessageStyle = {
+          fontSize: '1.5rem',
+          fontWeight: 'bold',
+          marginTop: '1rem',
+          color: 'primary', // Text color
+        };
+    
+    const [prize, setPrize] = useState<string | null>();
  
- 
-  const [data, setData] = useState([]);
+    useEffect(() => {
+
+        const params = new URLSearchParams(location.search);
+        setPrize(params.get('prize')) ;
+        const user = params.get('user');
+
+        axios.post('https://erms.stefhol.eu/api/v1/user/'+user+'/order', {
+            startDate: new Date(params.get('von')).toISOString(),
+            endDate: new Date(params.get('bis')).toISOString(),
+            offerId: params.get('offer'),
+
+        }).then((response) => {
+            console.log(response);
+        }
+        ).catch((error) => {
+            console.log(error);
+        }
+        );
+
+    }, []);
 
   // Function to calculate distance using Haversine formula
  
@@ -19,26 +62,16 @@ const Finish: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        
-          <IonCard >
-          <IonItem style={{ padding: '20px' }}>
-                
-            
-            <IonLabel>Wow you did it payed x dollars and saved y emissions - congratz buddy.
-                
-            </IonLabel>
-            
-            
-          </IonItem>
-            
-            
-          </IonCard>
-         
-        
+        <div style={containerStyle}>
+          <IonIcon icon={checkmarkCircle} style={successIconStyle} />
+          <IonText style={successMessageStyle}>Order Successful!</IonText>
+          
+        </div>
       </IonContent>
     </IonPage>
   );
 };
+    
 
 export default Finish;
 

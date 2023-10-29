@@ -46,7 +46,7 @@ const Tab1: React.FC = () => {
 
     console.log('Longitude:', longitude);
     console.log('Latitude:', latitude);
-    history.push(`/search?long=${longitude}&lat=${latitude}`);
+    history.push(`/tabs/search?long=${longitude}&lat=${latitude}&von=${startDate}&bis=${endDate}`);
 
 
   };
@@ -72,41 +72,7 @@ const Tab1: React.FC = () => {
         <div style={{ textAlign: 'center' }}>
           <IonItem style={{ padding: '20px' }}>
             <IonLabel color="primary" style={{fontWeight:'bold' }}>Miete ein Auto</IonLabel>
-            
           </IonItem>
-          <IonItem style={{ padding: '20px' }}>
-            <IonLabel position="floating">Enter street name</IonLabel>
-            <IonInput
-              type="text"
-              value={street}
-              onIonChange={(e) => setStreet(e.detail.value!)}
-            />
-          </IonItem>
-          <IonItem style={{ padding: '20px' }}>
-            <IonLabel position="floating">Enter street number</IonLabel>
-            <IonInput
-              type="number"
-              value={streetNumber}
-              onIonChange={(e) => setStreetNumber(e.detail.value!)}
-            />
-          </IonItem>
-          <IonItem style={{ padding: '20px' }}>
-            <IonLabel position="floating">Enter city name</IonLabel>
-            <IonInput
-              type="text"
-              value={city}
-              onIonChange={(e) => setCity(e.detail.value!)}
-            />
-          </IonItem>
-          <IonItem style={{ padding: '20px' }}>
-            <IonLabel position="floating">Enter Postal Code</IonLabel>
-            <IonInput
-              type="number"
-              value={postcode}
-              onIonChange={(e) => setPostcode(e.detail.value!)}
-            />
-          </IonItem>
-          
           <IonItem style={{ padding: '20px' }}>
             <IonLabel position="floating">Select Start Date</IonLabel>
             <IonInput
@@ -125,14 +91,6 @@ const Tab1: React.FC = () => {
               value={endDate}
               
               onIonChange={(e) => setEndDate(e.detail.value!)}
-            />
-          </IonItem>
-          <IonItem style={{ padding: '20px' }}>
-            <IonLabel position="floating">Enter Number of Seats</IonLabel>
-            <IonInput
-              type="number"
-              value={seats}
-              onIonChange={(e) => setSeats(e.detail.value!)}
             />
           </IonItem>
           

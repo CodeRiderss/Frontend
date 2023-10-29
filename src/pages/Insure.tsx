@@ -5,8 +5,14 @@ import { Link } from 'react-router-dom';
 
 const Insure: React.FC = () => {
  
- 
-  const [data, setData] = useState([]);
+    let insure = window.location.search;
+    let params = new URLSearchParams(insure);
+    let prize = parseFloat(params.get('prize'));
+    let von = params.get('von');
+    let bis = params.get('bis');
+    let user = params.get('user');
+    let offer = params.get('offer');
+  
 
   // Function to calculate distance using Haversine formula
  
@@ -28,9 +34,9 @@ const Insure: React.FC = () => {
             <IonLabel>4,99€ inkl. Steuern
                 
             </IonLabel>
-            <Link to={`/finish`}> {/* Navigate to /accept/index */}
-                <IonButton color="success" >
-                  Accept {/* Add a green accept button */}
+            <Link to={`/tabs/finish?prize=${prize+4.99}&von=${von}&bis=${bis}&user=${user}&offer=${offer}`}> 
+                <IonButton color="primary" >
+                  Buchen 
                 </IonButton>
               </Link>
             
@@ -46,9 +52,9 @@ const Insure: React.FC = () => {
           <IonLabel>5,99€ inkl. Steuern
                 
             </IonLabel>
-            <Link to={`/finish`}> {/* Navigate to /accept/index */}
-                <IonButton color="success" >
-                  Accept {/* Add a green accept button */}
+            <Link to={`/tabs/finish?prize=${prize+5.99}&von=${von}&bis=${bis}&user=${user}&offer=${offer}`}> {/* Navigate to /accept/index */}
+                <IonButton color="primary" >
+                  Buchen 
                 </IonButton>
               </Link>
               </IonItem>
@@ -61,9 +67,9 @@ const Insure: React.FC = () => {
           <IonLabel>3,99€ inkl. Steuern
                 
             </IonLabel>
-            <Link to={`/finish`}> {/* Navigate to /accept/index */}
-                <IonButton color="success" >
-                  Accept {/* Add a green accept button */}
+            <Link to={`/tabs/finish?prize=${prize+3.99}&von=${von}&bis=${bis}&user=${user}&offer=${offer}`}> {/* Navigate to /accept/index */}
+                <IonButton color="primary" >
+                  Buchen 
                 </IonButton>
               </Link>
               </IonItem>
