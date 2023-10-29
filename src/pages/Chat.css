@@ -1,0 +1,21 @@
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .sent {
+    margin-left: auto;
+    background-color: #79a083;
+  }
+  
+  .received {
+    margin-right: auto;
+    background-color: #DEDEDE;
+  }
+  
+  .ion-chip {
+    margin-bottom: 10px;
+    max-width: 70%;
+    border-radius: 10px;
+  }

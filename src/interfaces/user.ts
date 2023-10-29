@@ -8,6 +8,7 @@ export interface User {
     email:       string;
     ratings:     Rating[];
     id:          number;
+    profileUrl?:  string;
 }
 
 export interface Rating {
