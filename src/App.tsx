@@ -54,9 +54,7 @@ const App: React.FC = () => (
         <Route path="/" component={Login} exact />
         <Route path="/register" component={Register} exact />
         <PrivateRoute path="/tabs" component={MainTabs} />
-        <Route path="/search" component={Search} exact />
-        <Route path="/insure" component={Insure} exact />
-        <Route path="/finish" component={Finish} exact />
+        
       </AuthProvider>
     </IonReactRouter>
   </IonApp>
