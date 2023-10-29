@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { IonPage, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonItem, IonLabel, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
+import { IonPage, IonIcon, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonItem, IonLabel, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
 import { Link } from 'react-router-dom';
+import { shieldCheckmarkOutline } from 'ionicons/icons';
 
 const Insure: React.FC = () => {
  
@@ -32,10 +33,9 @@ const Insure: React.FC = () => {
         
           <IonCard >
           <IonItem style={{ padding: '20px' }}>
-            <IonLabel>https://appsichern.de/carsharingschutz.html
-                
-            </IonLabel>
-            <IonLabel>4,99€ inkl. Steuern
+            
+            <IonIcon icon={shieldCheckmarkOutline}></IonIcon>
+            <IonLabel> 4,99€ inkl. Steuern
                 
             </IonLabel>
             <Link to={`/tabs/finish?prize=${prize+4.99}&von=${von}&bis=${bis}&user=${user}&offer=${offer}`}> 
@@ -50,10 +50,10 @@ const Insure: React.FC = () => {
           </IonCard>
           <IonCard >
           <IonItem style={{ padding: '20px' }}>
-            <IonLabel>https://versicherung-kurzzeitkennzeichen.com/</IonLabel>
+          <IonIcon icon={shieldCheckmarkOutline}></IonIcon>
             
           
-          <IonLabel>5,99€ inkl. Steuern
+          <IonLabel> 5,99€ inkl. Steuern
                 
             </IonLabel>
             <Link to={`/tabs/finish?prize=${prize+5.99}&von=${von}&bis=${bis}&user=${user}&offer=${offer}`}> {/* Navigate to /accept/index */}
@@ -66,9 +66,9 @@ const Insure: React.FC = () => {
           </IonCard>
           <IonCard >
           <IonItem style={{ padding: '20px' }}>
-          <IonLabel>https://mietwagenschutz.vwfs.de/</IonLabel>
+          <IonIcon icon={shieldCheckmarkOutline}></IonIcon>
           
-          <IonLabel>3,99€ inkl. Steuern
+          <IonLabel> 3,99€ inkl. Steuern
                 
             </IonLabel>
             <Link to={`/tabs/finish?prize=${prize+3.99}&von=${von}&bis=${bis}&user=${user}&offer=${offer}`}> {/* Navigate to /accept/index */}
